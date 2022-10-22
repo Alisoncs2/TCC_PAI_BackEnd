@@ -1,9 +1,9 @@
-const db = require("../../config");
+const db = require("../../../config");
 const express = require("express");
-const requireJsonContent = require("../../middlewares/requireJsonContent.middleware");
+const requireJsonContent = require("../../../middlewares/requireJsonContent.middleware");
 const address = express.Router()
 const addressSchema = require("../model/address.model");
-const validate = require("../../middlewares/validateSchema.middleware");
+const validate = require("../../../middlewares/validateSchema.middleware");
 
 
 const enderecos = db.collection("endereços")
