@@ -42,7 +42,7 @@ car.put("/car/:id", requireJsonContent, validate(carSchema),async(req,res) =>{
 car.delete("/car/:id", async(req,res) =>{
 
     const id = req.params.id;
-    await carros.doc(id).delete(data);
+    await enderecos.doc(id).delete();
     res.json(`Id: ${id} deletado`)
 })
 

@@ -42,7 +42,7 @@ address.put("/address/:id", requireJsonContent, validate(addressSchema),async(re
 address.delete("/address/:id", async(req,res) =>{
 
     const id = req.params.id;
-    await enderecos.doc(id).delete(data);
+    await enderecos.doc(id).delete();
     res.json(`Id: ${id} deletado`)
 })
 
