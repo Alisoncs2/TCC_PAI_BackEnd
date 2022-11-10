@@ -1,45 +1,45 @@
-const db = require("../../../config");
+const db = require("../../../../config");
 const express = require("express");
 const requireJsonContent = require("../../../middlewares/requireJsonContent.middleware");
-const car = express.Router()
-const carSchema = require("../model/car.model");
+const address = express.Router()
+const addressSchema = require("../model/address.model");
 const validate = require("../../../middlewares/validateSchema.middleware");
 
 
-const carros = db.collection("carros")
+const enderecos = db.collection("endereços")
 
-car.get("/car/:id?", async (req, res) => {
+address.get("/address/:id?", async (req, res) => {
 
     const id  =  req.params.id;
 
     if(!id){
-        const snapshot = await carros.get();
+        const snapshot = await enderecos.get();
         const list = snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
         res.send(list);
     }else{
-        const item =  await carros.doc(id).get();
+        const item =  await enderecos.doc(id).get();
         const doc = item.data();
         res.send(doc);
     }
     
 });
 
-car.post("/car",requireJsonContent, validate(carSchema), async(req,res) =>{
-    
+address.post("/address",requireJsonContent, validate(addressSchema), async(req,res) =>{
     const data = req.body;
-    await carros.add(data)
+    console.log(data);
+    await enderecos.add(data)
     res.json(data)
 }) 
 
-car.put("/car/:id", requireJsonContent, validate(carSchema),async(req,res) =>{
+address.put("/address/:id", requireJsonContent,validate(addressSchema),async(req,res) =>{
 
     const id = req.params.id;
     const data = req.body;
-    await carros.doc(id).update(data);
+    await enderecos.doc(id).update(data);
     res.json(data)
 })
 
-car.delete("/car/:id", async(req,res) =>{
+address.delete("/address/:id", async(req,res) =>{
 
     const id = req.params.id;
     await enderecos.doc(id).delete();
@@ -47,4 +47,4 @@ car.delete("/car/:id", async(req,res) =>{
 })
 
 
-module.exports = car
+module.exports = address

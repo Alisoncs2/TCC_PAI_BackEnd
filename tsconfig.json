@@ -1,16 +1,11 @@
 {
-    "compilerOptions": {
-      "skipLibCheck": true,
-      "target": "es6",
-      "module": "es2015",
-      "moduleResolution": "node",
-      "allowJs": true,
-      "resolveJsonModule": true,
-      "esModuleInterop": true,
-      "outDir": "./build",
-      "rootDir": "src",
-    },
-    "include": ["src/**/*"],
-    "exclude": ["node_modules"]
-  }
-  
+  "compilerOptions": {
+    "rootDir": ".",
+    "outDir": ".",  // if out path for a file is same as its src path, nothing will be emitted
+    "resolveJsonModule": true,
+    "composite": true  // required on the dependency project for references to work
+  },
+  "files": [         // by whitelisting the files to include, TS won't automatically
+    "package.json"   // include all source below root, which is the default.
+  ]
+}
